@@ -11,7 +11,7 @@ Watch the related video on YouTube channel, it's amazing.
 git clone https://github.com/wilson-boca/flask-boilerplate-blueprint.git
 ```
 
-## Envirunment
+## Environment
 
 Python 3.6+
 Activate your virtualenv (mkvirtualenv)
@@ -49,9 +49,11 @@ flask create-db
 flask populate-db
 flask add-user -u admin -p 123456
 flask run
+
+Users inserted from command line are admins
 ```
 
-Calling the API:
+## Calling the API:
 
 - Website: http://localhost:5000
 - Admin: http://localhost:5000/admin/
