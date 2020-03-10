@@ -1,0 +1,54 @@
+[default]
+DEBUG = false
+FLASK_ADMIN_NAME = "Flask API Admin"
+FLASK_ADMIN_TEMPLATE_MODE = "bootstrap3"
+FLASK_ADMIN_SWATCH = 'cerulean'
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://dev:dev@localhost/archi'
+SQLALCHEMY_TRACK_MODIFICATIONS = "True"
+PROPAGATE_EXCEPTIONS = "True"
+TITLE = "Flask API Admin"
+SECRET_KEY = "jadkfbsdkjbfbh"
+JWT_BLACKLIST_ENABLED = "True"
+JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
+PASSWORD_SCHEMES = ['pbkdf2_sha512', 'md5_crypt']
+EXTENSIONS = [
+    "flaskapp.ext.appearance:init_app",
+    "flaskapp.ext.database:init_app",
+    "flaskapp.ext.auth:init_app",
+    "flaskapp.ext.admin:init_app",
+    "flaskapp.ext.commands:init_app",
+    "flaskapp.blueprints.webui:init_app",
+    "flaskapp.blueprints.restapi:init_app",
+    "flaskapp.blueprints.authapi:init_app"
+]
+
+
+[development]
+EXTENSIONS = [
+    "flask_debugtoolbar:DebugToolbarExtension",
+    "dynaconf_merge_unique"  # to reuse extensions list from [default]
+]
+TEMPLATES_AUTO_RELOAD = true
+DEBUG = true
+DEBUG_TOOLBAR_ENABLED = true
+DEBUG_TB_INTERCEPT_REDIRECTS = false
+DEBUG_TB_PROFILER_ENABLED = true
+DEBUG_TB_TEMPLATE_EDITOR_ENABLED = true
+DEBUG_TB_PANELS = [
+    "flask_debugtoolbar.panels.versions.VersionDebugPanel",
+    "flask_debugtoolbar.panels.sqlalchemy.SQLAlchemyDebugPanel",
+    "flask_debugtoolbar.panels.timer.TimerDebugPanel",
+    "flask_debugtoolbar.panels.headers.HeaderDebugPanel",
+    "flask_debugtoolbar.panels.request_vars.RequestVarsDebugPanel",
+    "flask_debugtoolbar.panels.template.TemplateDebugPanel",
+    "flask_debugtoolbar.panels.route_list.RouteListDebugPanel",
+    "flask_debugtoolbar.panels.logger.LoggingPanel",
+    "flask_debugtoolbar.panels.profiler.ProfilerDebugPanel",
+    "flask_debugtoolbar.panels.config_vars.ConfigVarsDebugPanel"
+]
+
+[testing]
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://dev:dev@localhost/archi'
+
+[production]
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://dev:dev@localhost/archi'
