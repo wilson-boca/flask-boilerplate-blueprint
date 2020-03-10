@@ -8,7 +8,7 @@ Watch the related video on YouTube channel, it's amazing.
 ## Clone
 
 ```bash
-git clone https://github.com/wilsobnboca/flask-boilerplate-blueprint.git
+git clone https://github.com/wilson-boca/flask-boilerplate-blueprint.git
 ```
 
 ## Envirunment
