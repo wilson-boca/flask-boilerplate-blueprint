@@ -1,10 +1,10 @@
 from flask import Blueprint
-from flask_restful import Api
+from flask_restplus import Api
 
 from .resources import ProductItemResource, ProductResource
 
-bp = Blueprint("restapi", __name__, url_prefix="/api/v1")
-api = Api(bp)
+bp = Blueprint("productapi", __name__, url_prefix="/api/v1")
+api = Api(bp, version='1.0', title='Product API', description='A simple product API example',)
 
 
 def init_app(app):
