@@ -61,9 +61,9 @@ Users inserted from command line are admins
 - Admin: http://localhost:5000/admin/
 - Swagger-UI: http://localhost:5000/api/v1 
 - API:
-  POST - http://127.0.0.1:5000/api/v1/users - Add user
-  GET  - http://127.0.0.1:5000/api/v1/users - Users list
-  GET  - http://127.0.0.1:5000/api/v1/users/1 - User with id 1
-  POST - http://127.0.0.1:5000/api/v1/login - Logout user
-  POST - http://127.0.0.1:5000/api/v1/logout - Logout user
+  - http://127.0.0.1:5000/api/v1/users - Add user (GET)
+  - http://127.0.0.1:5000/api/v1/users - Users list (GET)
+  - http://127.0.0.1:5000/api/v1/users/1 - User with id 1 (GET)
+  - http://127.0.0.1:5000/api/v1/login - Logout user (POST)
+  - http://127.0.0.1:5000/api/v1/logout - Logout user (POST)
  
