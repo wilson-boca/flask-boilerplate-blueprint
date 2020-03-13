@@ -1,7 +1,9 @@
 # Flask architecture using Blueprint
 
-Based on https://codeshow.com.br/arquitetura-web-python-flask/ from Bruno Rocha.
-Watch the related video on YouTube channel, it's amazing.
+Based on [https://codeshow.com.br/arquitetura-web-python-flask/](https://codeshow.com.br/arquitetura-web-python-flask/) from Bruno Rocha.
+Watch his video on YouTube channel, it's amazing.
+
+It uses Flask-RESTPlus(Swagger-UI), Flask-Admin and JWT authentication.
 
 ---
 
@@ -57,9 +59,11 @@ Users inserted from command line are admins
 
 - Website: http://localhost:5000
 - Admin: http://localhost:5000/admin/
-- API GET:
-  - http://127.0.0.1:5000/api/v1/auth/create - Add user
-  - http://127.0.0.1:5000/api/v1/auth/users - Users list
-  - http://127.0.0.1:5000/api/v1/auth/users/1 - User with id 1
-  - http://127.0.0.1:5000/api/v1/auth/logout - Logout user
+- Swagger-UI: http://localhost:5000/api/v1 
+- API:
+  POST - http://127.0.0.1:5000/api/v1/users - Add user
+  GET  - http://127.0.0.1:5000/api/v1/users - Users list
+  GET  - http://127.0.0.1:5000/api/v1/users/1 - User with id 1
+  POST - http://127.0.0.1:5000/api/v1/login - Logout user
+  POST - http://127.0.0.1:5000/api/v1/logout - Logout user
  
