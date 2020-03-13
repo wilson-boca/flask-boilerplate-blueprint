@@ -1,6 +1,9 @@
-from flask import Flask
+import werkzeug
 
+from flask import Flask
 from flaskapp.ext import configuration
+
+werkzeug.cached_property = werkzeug.utils.cached_property
 
 
 def minimal_app(**config):

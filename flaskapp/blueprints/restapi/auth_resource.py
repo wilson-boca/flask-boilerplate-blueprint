@@ -1,15 +1,31 @@
 import datetime
-from flask import request, make_response, jsonify, abort
-from flask_jwt_extended import jwt_required, get_raw_jwt, create_access_token, create_refresh_token
-from flask.views import MethodView
+from flask import request, make_response, jsonify
+from flask_jwt_extended import get_raw_jwt, create_access_token, jwt_required
+from flask_restplus import fields, Resource
 from flaskapp.ext.auth import add_to_black_list
 from flaskapp.models import User
 from flaskapp.ext.auth import check_hash, generate_hash
+from flaskapp.blueprints.restapi.singleton_api import SingletonApi
+
+api = SingletonApi.get_instance()
+
+user = api.model('User', {
+    'name': fields.String(example='Rodrigo'),
+    'username': fields.String(example='rodrigo@gmail.com'),
+    'password': fields.String(example='123456'),
+    'profile': fields.String(example='user')
+})
 
 
-class RegisterAPI(MethodView):
+login = api.model('Login', {
+    'username': fields.String(description='Your username', example='wilson2@gmail.com'),
+    'password': fields.String(description='Your password', example='123456')
+})
 
-    @jwt_required
+
+class RegisterAPI(Resource):
+    @api.doc(security='Authorization')
+    @api.expect(user)
     def post(self):
         try:
             post_data = request.get_json()
@@ -24,7 +40,9 @@ class RegisterAPI(MethodView):
             return make_response(jsonify(response_object), 500)
 
 
-class LoginAPI(MethodView):
+class LoginAPI(Resource):
+
+    @api.expect(login)
     def post(self):
         try:
             post_data = request.get_json()
@@ -50,13 +68,14 @@ class LoginAPI(MethodView):
             return make_response(jsonify(response_object), 500)
 
 
-class UserAPI(MethodView):
+class UserAPI(Resource):
 
     def __query(self, args):
         users = [user.as_dict() for user in User.list_all()]
         return make_response(jsonify(users), 200)
 
     @jwt_required
+    @api.doc(security='Authorization')
     def get(self, id=None):
         try:
             if id is None:
@@ -70,8 +89,22 @@ class UserAPI(MethodView):
             }
             return make_response(jsonify(response_object), 500)
 
+    @api.doc(security='Authorization')
+    def post(self):
+        try:
+            post_data = request.get_json()
+            post_data['password'] = generate_hash(post_data.get('password', ''))
+            user = User.create_from_dict(post_data)
+            return make_response(jsonify(user.as_dict()), 201)
+        except Exception as e:
+            response_object = {
+                'status': 'fail',
+                'message': 'Some error occurred. Please try again.',
+            }
+            return make_response(jsonify(response_object), 500)
 
-class LogoutAPI(MethodView):
+
+class LogoutAPI(Resource):
 
     @jwt_required
     def post(self):
@@ -84,6 +117,20 @@ class LogoutAPI(MethodView):
                 'token': create_access_token(identity='Logout', expires_delta=datetime.timedelta(days=0, seconds=1))
             }
             return make_response(jsonify(response_object), 200)
+        except Exception as e:
+            response_object = {
+                'status': 'fail',
+                'message': str(e)
+            }
+            return make_response(jsonify(response_object), 500)
+
+
+class ToPostman(Resource):
+
+    @jwt_required
+    def get(self):
+        try:
+            return make_response(jsonify(api.as_postman(urlvars=False, swagger=True)), 200)
         except Exception as e:
             response_object = {
                 'status': 'fail',
