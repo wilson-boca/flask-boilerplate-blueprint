@@ -8,3 +8,6 @@ def make_celery(app_name=__name__):
 
 
 celery = make_celery()
+celery.conf.task_routes = {
+    'flaskapp.celery_ext.tasks.make_capuccino': {'queue': 'slow'}
+}

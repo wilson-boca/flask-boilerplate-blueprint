@@ -55,7 +55,11 @@ Users inserted from command line are admins
 ## Starting Celery workers
 
 ```bash
+Main queue for quick tasks (Like sendmail)
 $celery worker -A flaskapp.celery_ext.celery_worker.celery --loglevel=info --pool=solo
+
+Slow queue for tasks take takes a lot of time
+$worker -A flaskapp.celery_ext.celery_worker.celery --loglevel=info --queue slow
 ```
 
 ## Calling the API:
@@ -63,10 +67,11 @@ $celery worker -A flaskapp.celery_ext.celery_worker.celery --loglevel=info --poo
 - Website: http://localhost:5000
 - Admin: http://localhost:5000/admin/
 - Swagger-UI: http://localhost:5000/api/v1 
-- API:
+- API calls:
   - http://127.0.0.1:5000/api/v1/users - Add user (POST)
   - http://127.0.0.1:5000/api/v1/users - Users list (GET)
   - http://127.0.0.1:5000/api/v1/users/1 - User with id 1 (GET)
   - http://127.0.0.1:5000/api/v1/login - Logout user (POST)
   - http://127.0.0.1:5000/api/v1/logout - Logout user (POST)
-  - http://127.0.0.1:5000/api/v1/celery/your_name - Make a celery coffee for you (GET)
+  - http://127.0.0.1:5000/api/v1/celery/coffee/your_name - Make a celery quick coffee for you (GET)
+  - http://127.0.0.1:5000/api/v1/celery/capuccino/your_name - Make a celery slow capuccino for you (GET)
