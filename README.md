@@ -13,7 +13,7 @@ $git clone https://github.com/wilson-boca/flask-boilerplate-blueprint.git
 ## Environment
 
 Python 3.6+
-Activate your virtualenv (mkvirtualenv)
+Activate your virtualenv (mkvirtualenv, venv, etc)
 
 ## Install requirements
 
@@ -39,6 +39,8 @@ $ exit
 
 ```bash
 $pytest flaskapp/tests
+
+It's under construction...
 ```
 
 ## Running
@@ -49,16 +51,16 @@ $flask populate-db
 $flask add-user -u admin -p 123456
 $flask run
 
-Users inserted from command line are admins
+Added users from terminal are all admins
 ```
 
-## Starting Celery workers
+## Starting Celery Workers
 
 ```bash
 Main queue for quick tasks (Like sendmail)
 $celery worker -A flaskapp.celery_ext.celery_worker.celery --loglevel=info --pool=solo
 
-Slow queue for tasks take takes a lot of time
+Slow queue for slow(heavy) tasks
 $worker -A flaskapp.celery_ext.celery_worker.celery --loglevel=info --queue slow
 ```
 
