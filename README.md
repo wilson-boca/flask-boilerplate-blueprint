@@ -1,13 +1,13 @@
 # Flask architecture using Blueprint
 
-It uses Flask-RESTPlus(Swagger-UI), Flask-Admin, JWT authentication and Celery.
+It uses Flask-RESTPlus(Swagger-UI), Flask-Admin, JWT authentication, SQL Alchemy and Celery.
 
 ---
 
 ## Clone
 
 ```bash
-git clone https://github.com/wilson-boca/flask-boilerplate-blueprint.git
+$git clone https://github.com/wilson-boca/flask-boilerplate-blueprint.git
 ```
 
 ## Environment
@@ -18,9 +18,9 @@ Activate your virtualenv (mkvirtualenv)
 ## Install requirements
 
 ```bash
-pip install -r requirements.txt
-pip install -r requirements_dev.txt
-pip install -r requirements_test.txt
+$pip install -r requirements.txt
+$pip install -r requirements_dev.txt
+$pip install -r requirements_test.txt
 ```
 
 ## Setting up database
@@ -38,18 +38,24 @@ $ exit
 ## Testing
 
 ```bash
-pytest flaskapp/tests
+$pytest flaskapp/tests
 ```
 
 ## Running
 
 ```bash
-flask create-db
-flask populate-db
-flask add-user -u admin -p 123456
-flask run
+$flask create-db
+$flask populate-db
+$flask add-user -u admin -p 123456
+$flask run
 
 Users inserted from command line are admins
+```
+
+## Starting Celery workers
+
+```bash
+$celery worker -A flaskapp.celery_ext.celery_worker.celery --loglevel=info --pool=solo
 ```
 
 ## Calling the API:
@@ -63,4 +69,4 @@ Users inserted from command line are admins
   - http://127.0.0.1:5000/api/v1/users/1 - User with id 1 (GET)
   - http://127.0.0.1:5000/api/v1/login - Logout user (POST)
   - http://127.0.0.1:5000/api/v1/logout - Logout user (POST)
- 
+  - http://127.0.0.1:5000/api/v1/celery/your_name - Make a celery coffee for you (GET)
