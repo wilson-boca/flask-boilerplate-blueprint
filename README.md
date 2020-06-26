@@ -1,9 +1,6 @@
 # Flask architecture using Blueprint
 
-Based on [https://codeshow.com.br/arquitetura-web-python-flask/](https://codeshow.com.br/arquitetura-web-python-flask/) from Bruno Rocha.
-Watch his video on YouTube channel, it's amazing.
-
-It uses Flask-RESTPlus(Swagger-UI), Flask-Admin and JWT authentication.
+It uses Flask-RESTPlus(Swagger-UI), Flask-Admin, JWT authentication and Celery.
 
 ---
 
